@@ -15,7 +15,7 @@ class TripsListviewComponant extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: FutureBuilder<List<TripModel>>(
-        future: Future.delayed(const Duration(milliseconds: 200), () => TripServise.trips),
+        future: Future.delayed(const Duration(milliseconds: 200), () => TripService.trips),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return ListView.builder(
@@ -73,106 +73,143 @@ class TripsListviewComponant extends StatelessWidget {
                       tripController.update();
                     }
                   },
-
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    padding: const EdgeInsets.only(top: 10, bottom: 15, left: 15, right: 15),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: const Color(0xff8da5df), width: 1),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(3),
-                              decoration: BoxDecoration(
-                                color: const Color(0xff1E293B),
-                                borderRadius: BorderRadius.circular(3),
-                              ),
-                              child: Text(
-                                '${trip.time.hour}:${trip.time.minute.toString().padLeft(2, '0')}',
-                                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Color(0xff8da5df), width: 1),
+                      ),
+                      child: Row(
+                        children: [
+                          // الجزء الأول: الصورة الجانبية
+                          Expanded(
+                            flex: 2,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: trip.imgLink2 == null || trip.imgLink2.isEmpty
+                                  ? Icon(
+                                Icons.image_not_supported_outlined,
+                                size: 60,
+                                color: Colors.grey,
+                              )
+                                  : Image.asset(
+                                trip.imgLink2, // استبدالها بالرابط الفعلي للصورة
+                                fit: BoxFit.cover,
+                                height: 120,
+                                width: double.infinity,
+                                errorBuilder: (context, object, stackTrace) {
+                                  return Icon(
+                                    Icons.image_not_supported_outlined,
+                                    size: 60,
+                                    color: Colors.grey,
+                                  );
+                                },
                               ),
                             ),
-                            Row(
+                          ),
+                          SizedBox(width: 15), // فاصل بين الصورة والتفاصيل
+
+                          // الجزء الثاني: التفاصيل
+                          Expanded(
+                            flex: 3,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                // العنوان (حلب - دمشق)
                                 Text(
-                                  trip.driver,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: 'Tajawal',
+                                  '${trip.city1} - ${trip.city2}',
+                                  style: TextStyle(
                                     fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Tajawal',
                                   ),
                                 ),
-                                SizedBox(width: 20.w),
-                                CircleAvatar(
-                                  backgroundImage: NetworkImage(trip.imgLink),
-                                  radius: 25.r,
+
+                                // التاريخ
+                                Text(
+                                 ' ${tripController.getWeekdayName(trip.date.weekday)} ${trip.date.day} ${tripController.getMonthName(trip.date.month)} ${trip.date.year}',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.grey,
+                                    fontFamily: 'Tajawal',
+                                  ),
                                 ),
-                                SizedBox(height: 20.h),
+
+                                // وقت الانطلاق والوصول
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      '${trip.time.hour}:${trip.time.minute.toString().padLeft(2, '0')}',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'Tajawal',
+                                      ),
+                                    ),
+                                    Icon(Icons.access_time, size: 18, color: Colors.grey),
+                                    Text(
+                                      '10:00', // استبدالها بالوقت الفعلي للوصول
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'Tajawal',
+                                      ),
+                                    ),
+                                    Icon(Icons.access_time, size: 18, color: Colors.grey),
+                                  ],
+                                ),
+
+                                // المسافة
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'km${trip.distance}', // استبدالها بالمسافة الفعلية
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'Tajawal',
+                                      ),
+                                    ),
+                                    Icon(Icons.directions_car, size: 18, color: Colors.grey),
+                                    Text(
+                                      '\$${trip.price}', // استبدالها بالسعر الفعلي
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'Tajawal',
+                                      ),
+                                    ),
+                                    Icon(Icons.attach_money, size: 18, color: Colors.grey),
+                                  ],
+                                ),
+
+                                // المقاعد المتاحة
+                                Obx(() => Text(
+                                  'المقاعد المتاحة: ${trip.seats}',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Color(0xff0F172A),
+                                    fontFamily: 'Tajawal',
+                                  ),
+                                )),
                               ],
                             ),
-                          ],
-                        ),
-                        const SizedBox(height: 50),
-                        Text.rich(
-                          textAlign: TextAlign.center,
-                          TextSpan(
-                            style: const TextStyle(
-                              fontFamily: 'Tajawal',
-                              color: Color(0xff334155),
-                              fontWeight: FontWeight.w500,
-                              fontSize: 22,
-                            ),
-                            children: [
-                              const TextSpan(text: 'رحلة من '),
-                              TextSpan(
-                                text: '  ${trip.city1}   ',
-                                style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-                              ),
-                              const TextSpan(text: ' إلى '),
-                              TextSpan(
-                                text: '   ${trip.city2}',
-                                style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-                              ),
-                            ],
                           ),
-                        ),
-                        const SizedBox(height: 50),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '${trip.price} ل.س',
-                              style: const TextStyle(
-                                  color: Color(0xff0F172A), fontWeight: FontWeight.w700, fontSize: 17, fontFamily: 'Tajawal'),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(width: 0.8, color: const Color(0xff0F172A)),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              padding: const EdgeInsets.all(5),
-                              child: Obx(() =>
-                                  Text(
-                                    'المقاعد المتاحة ${trip.seats} ',
-                                    style: const TextStyle(color: Color(0xff0F172A), fontSize: 17, fontFamily: 'Tajawal'),
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );
               },
             );
           } else {
-            return const Center(child: Text('لا يوجد بيانات'));
+            return  Center(child: Text('لا يوجد بيانات'));
           }
         },
       ),

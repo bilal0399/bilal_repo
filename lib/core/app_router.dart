@@ -11,7 +11,7 @@ import '../featuers/splash/splash_binding.dart';
 import '../featuers/splash/splash_screen.dart';
 import '../featuers/trip/view/profile_page.dart';
 import '../featuers/trip/view/serch_page.dart';
-import '../featuers/trip/view/trip_datiles_page.dart';
+import '../featuers/trip/view/trip_datiles_page/trip_datiles_page.dart';
 
 class AppRouter  {
   static const String authPage ="/auth";

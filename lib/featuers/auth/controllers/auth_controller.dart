@@ -61,14 +61,14 @@ class AuthController extends GetxController {
     Get.offAll(AuthPage());
   }
 
-  // 🚀 حفظ بيانات المستخدم في SharedPreferences
+
   Future<void> saveUserData() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('name', name.value);
     await prefs.setString('email', email.value);
   }
 
-  // 🔥 تحميل بيانات المستخدم عند بدء التطبيق
+
   Future<void> loadUserData() async {
     final prefs = await SharedPreferences.getInstance();
     name.value = prefs.getString('name') ?? "Guest";

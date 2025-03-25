@@ -41,7 +41,7 @@ class SearchPage extends StatelessWidget {
                   value: tripController.fromCity.value,
                   onChanged: (value) => tripController.fromCity.value = value!,
                   items:
-                      TripServise.cities.map((city) {
+                  TripService.cities.map((city) {
                         return DropdownMenuItem(
                           value: city,
                           child: Text(
@@ -67,7 +67,7 @@ class SearchPage extends StatelessWidget {
                   value: tripController.toCity.value,
                   onChanged: (value) => tripController.toCity.value = value!,
                   items:
-                      TripServise.cities.map((city) {
+                  TripService.cities.map((city) {
                         return DropdownMenuItem(
                           value: city,
                           child: Text(

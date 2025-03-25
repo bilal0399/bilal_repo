@@ -18,6 +18,8 @@ dependencies:
   shimmer: ^3.0.0
   image_picker: ^1.1.2
   convex_bottom_bar: ^3.2.0
+  google_maps_flutter: ^2.11.0
+  flutter_map: ^8.1.1
 
 dev_dependencies:
   flutter_test:
@@ -29,7 +31,15 @@ flutter:
 
   assets:
     - assets/fonts/
-    - assets/images/travel.jpg  # إضافة الصورة هنا
+    - assets/images/travel.jpg
+    - assets/images/damascus.png
+    - assets/images/alippo.png
+    - assets/images/idlip.png
+    - assets/images/homs.png
+    - assets/images/hama.png
+    - assets/images/latakia.png
+    - assets/images/serch.png
+
 
   fonts:
     - family: Tajawal

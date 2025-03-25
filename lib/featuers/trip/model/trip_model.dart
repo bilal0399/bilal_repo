@@ -6,9 +6,16 @@ class TripModel {
   String city2;
   String driver;
   TimeOfDay time;
+  DateTime date;
+  String imgLink2;
   int price;
   String imgLink;
   RxInt seats;
+  String distance;
+  double startLat;
+  double startLng;
+  double endLat;
+  double endLng;
 
   // Constructor
   TripModel({
@@ -20,7 +27,13 @@ class TripModel {
     required int minute,
     required this.price,
     required this.imgLink,
+    required this.date,
+    required this.imgLink2,
+    required this.distance,
+    required this.startLat,
+    required this.startLng,
+    required this.endLat,
+    required this.endLng,
   })  : time = TimeOfDay(hour: hour, minute: minute),
         seats = seats.obs;
 }
-

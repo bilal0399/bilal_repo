@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:final_project2/featuers/trip/model/trip_model.dart';
 
-
 import '../servises/trip_servise.dart';
 
 class TripController extends GetxController {
@@ -20,9 +19,12 @@ class TripController extends GetxController {
 
   //-------------------------------------------------------------------
 
-  var allTrips = TripServise.trips.obs;
+  var allTrips = TripService.trips.obs;
   var searchResults = <TripModel>[].obs;
   RxBool isSearching = false.obs;
+
+  // متغير جديد للتحكم في حالة الحجز
+  RxBool isBooked = false.obs;
 
   void performSearch() {
     searchResults.value = searchTrips(fromCity.value, toCity.value, selectedTime.value?.hour ?? 0, selectedTime.value?.minute ?? 0);
@@ -35,15 +37,12 @@ class TripController extends GetxController {
     }
   }
 
-
   void resetSearch() {
     isSearching.value = false;
     searchResults.clear();
-
   }
 
   //-------------------------------------------------------------------
-
 
   Future<void> selectTime(BuildContext context) async {
     final TimeOfDay? picked = await showTimePicker(
@@ -54,15 +53,15 @@ class TripController extends GetxController {
       selectedTime.value = picked;
     }
   }
+
   List<TripModel> searchTrips(String from, String to, int hour, int minute) {
     int userTimeInMinutes = (hour * 60) + minute;
 
-    return TripServise.trips.where((trip) {
+    return TripService.trips.where((trip) {
       int tripTimeInMinutes = (trip.time.hour * 60) + trip.time.minute;
 
       bool isTimeInRange = (tripTimeInMinutes >= userTimeInMinutes - 300 &&
           tripTimeInMinutes <= userTimeInMinutes + 300);
-
 
       return trip.city1.toLowerCase().contains(from.toLowerCase()) &&
           trip.city2.toLowerCase().contains(to.toLowerCase()) &&
@@ -71,14 +70,27 @@ class TripController extends GetxController {
   }
 
   void bookSeat(int index) {
-    if (index >= 0 && index < TripServise.trips.length) {
-      var trip = TripServise.trips[index];
-      if (trip.seats.value > 0) {
+    if (index >= 0 && index < TripService.trips.length) {
+      var trip = TripService.trips[index];
+      if (trip.seats.value > 0 && !isBooked.value) {
         trip.seats.value--;
+        isBooked.value = true;
       }
     }
   }
+
+  String getMonthName(int month) {
+    const months = [
+      'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+      'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'
+    ];
+    return months[month - 1];
+  }
+  String getWeekdayName(int weekday) {
+    const weekdays = [
+      'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس',
+      'الجمعة', 'السبت', 'الأحد'
+    ];
+    return weekdays[weekday - 1];
+  }
 }
-
-
-

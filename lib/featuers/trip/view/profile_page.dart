@@ -79,6 +79,7 @@ class ProfilePage extends StatelessWidget {
                         fontSize: 18,
                       )),
                 ),
+                // Image.network(width: 100,'https://i.imgur.com/7c5Rqlh.png'),
               ],
             ),
           ),
@@ -111,6 +112,7 @@ class ProfilePage extends StatelessWidget {
               fontSize: 16,
             ),
           ),
+
         ],
       ),
     );
