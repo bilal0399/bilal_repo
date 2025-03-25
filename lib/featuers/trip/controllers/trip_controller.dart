@@ -10,6 +10,7 @@ class TripController extends GetxController {
   RxString fromCity = RxString('حلب');
   RxString toCity = RxString('دمشق');
   Rx<TimeOfDay?> selectedTime = Rx<TimeOfDay?>(null);
+  Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
   //-------------------------------------------------------------------
   Rx<TripModel?> selectedTrip = Rx<TripModel?>(null);
 
@@ -25,21 +26,44 @@ class TripController extends GetxController {
 
   // متغير جديد للتحكم في حالة الحجز
   RxBool isBooked = false.obs;
-
   void performSearch() {
-    searchResults.value = searchTrips(fromCity.value, toCity.value, selectedTime.value?.hour ?? 0, selectedTime.value?.minute ?? 0);
 
-    if (searchResults.isNotEmpty) {
-      isSearching.value = true;
-    } else {
-      Get.snackbar('لا توجد رحلات', 'لم يتم العثور على أي رحلة', colorText: Colors.red);
+    if (fromCity.value.isEmpty || toCity.value.isEmpty || selectedDate.value == null || selectedTime.value == null) {
+      Get.snackbar(
+        'بيانات غير مكتملة',
+        'يرجى إدخال جميع البيانات: المدينة المصدر، المدينة الهدف، التاريخ، والوقت.',
+        colorText: Colors.red,
+      );
       isSearching.value = false;
+      return;
+    }
+
+    // استدعاء دالة البحث باستخدام التاريخ والوقت المختارين
+    searchResults.value = TripService.searchTrips(
+      fromCity.value,
+      toCity.value,
+      selectedDate.value! as DateTime ,
+      selectedTime.value!.hour,
+      selectedTime.value!.minute,
+    ) as List<TripModel>;
+
+    // التحقق مما إذا كانت هناك نتائج للبحث
+    if (searchResults.isNotEmpty) {
+      isSearching.value = true; // تم العثور على رحلات
+    } else {
+      Get.snackbar(
+        'لا توجد رحلات',
+        'لم يتم العثور على أي رحلة تناسب معايير البحث.',
+        colorText: Colors.red,
+      );
+      isSearching.value = false; // لم يتم العثور على رحلات
     }
   }
 
   void resetSearch() {
     isSearching.value = false;
     searchResults.clear();
+    print('serch reset');
   }
 
   //-------------------------------------------------------------------
@@ -54,20 +78,7 @@ class TripController extends GetxController {
     }
   }
 
-  List<TripModel> searchTrips(String from, String to, int hour, int minute) {
-    int userTimeInMinutes = (hour * 60) + minute;
 
-    return TripService.trips.where((trip) {
-      int tripTimeInMinutes = (trip.time.hour * 60) + trip.time.minute;
-
-      bool isTimeInRange = (tripTimeInMinutes >= userTimeInMinutes - 300 &&
-          tripTimeInMinutes <= userTimeInMinutes + 300);
-
-      return trip.city1.toLowerCase().contains(from.toLowerCase()) &&
-          trip.city2.toLowerCase().contains(to.toLowerCase()) &&
-          isTimeInRange;
-    }).toList();
-  }
 
   void bookSeat(int index) {
     if (index >= 0 && index < TripService.trips.length) {
@@ -80,14 +91,14 @@ class TripController extends GetxController {
   }
 
   String getMonthName(int month) {
-    const months = [
+     var months = [
       'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
       'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'
     ];
     return months[month - 1];
   }
   String getWeekdayName(int weekday) {
-    const weekdays = [
+     var weekdays = [
       'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس',
       'الجمعة', 'السبت', 'الأحد'
     ];

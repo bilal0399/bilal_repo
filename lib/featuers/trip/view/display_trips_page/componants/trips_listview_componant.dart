@@ -79,12 +79,110 @@ class TripsListviewComponant extends StatelessWidget {
                       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       padding: EdgeInsets.all(15),
                       decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            blurRadius: 2,
+                            offset: Offset(0, 5),
+                          ),
+                        ],
                         borderRadius: BorderRadius.circular(15),
-                        border: Border.all(color: Color(0xff8da5df), width: 1),
+                        // border: Border.all(color: Color(0xff8da5df), width: 1),
                       ),
                       child: Row(
                         children: [
                           // الجزء الأول: الصورة الجانبية
+
+                          Expanded(
+                            flex: 3,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                // العنوان (حلب - دمشق)
+                                Text(
+                                  '${trip.city1} - ${trip.city2}',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Color(0xff0F172A),
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Tajawal',
+                                  ),
+                                ),
+
+                                // التاريخ
+                                Text(
+                                  ' ${tripController.getWeekdayName(trip.date.weekday)} ${trip.date.day} ${tripController.getMonthName(trip.date.month)} ${trip.date.year}',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.blueAccent,
+                                    fontFamily: 'Tajawal',
+                                  ),
+                                ),
+
+                                SizedBox(height: 20,),
+                                Row(
+                                  children: [
+                                    Icon(Icons.access_time, size: 18, color: Colors.grey),
+                                    SizedBox(width: 5,),
+                                    Text(
+                                      '${trip.time.hour}:${trip.time.minute.toString().padLeft(2, '0')}',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.grey[600],
+                                        fontFamily: 'Tajawal',
+                                      ),
+                                    ),
+                                    SizedBox(width: 40,),
+
+                                    Obx(() => Text(
+                                      ' ${trip.seats} مقعد متاح ',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                        // color: Color(0xffb80634),
+                                        fontFamily: 'Tajawal',
+                                      ),
+                                    )),
+                                  ],
+                                ),
+                                SizedBox(height: 5,),
+                                Row(
+                                  children: [
+                                    Icon(Icons.edit_road_outlined, size: 18, color: Colors.grey),
+                                    SizedBox(width: 5,),
+                                    Text(
+                                      '${trip.distance}',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.grey[600],
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'Tajawal',
+                                      ),
+                                    ),
+                                   SizedBox(width: 20,),
+                                    Icon(Icons.attach_money, size: 18, color: Colors.grey),
+                                    SizedBox(width: 5,),
+                                    Text(
+                                      '${trip.price} ل.س',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.grey[600],
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'Tajawal',
+                                      ),
+                                    ),
+
+                                  ],
+                                ),
+
+                                // المقاعد المتاحة
+
+                              ],
+                            ),
+                          ),
+                          SizedBox(width: 15), // فاصل بين الصورة والتفاص// يل
                           Expanded(
                             flex: 2,
                             child: ClipRRect(
@@ -110,97 +208,9 @@ class TripsListviewComponant extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(width: 15), // فاصل بين الصورة والتفاصيل
 
                           // الجزء الثاني: التفاصيل
-                          Expanded(
-                            flex: 3,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                // العنوان (حلب - دمشق)
-                                Text(
-                                  '${trip.city1} - ${trip.city2}',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Tajawal',
-                                  ),
-                                ),
 
-                                // التاريخ
-                                Text(
-                                 ' ${tripController.getWeekdayName(trip.date.weekday)} ${trip.date.day} ${tripController.getMonthName(trip.date.month)} ${trip.date.year}',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.grey,
-                                    fontFamily: 'Tajawal',
-                                  ),
-                                ),
-
-                                // وقت الانطلاق والوصول
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      '${trip.time.hour}:${trip.time.minute.toString().padLeft(2, '0')}',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Tajawal',
-                                      ),
-                                    ),
-                                    Icon(Icons.access_time, size: 18, color: Colors.grey),
-                                    Text(
-                                      '10:00', // استبدالها بالوقت الفعلي للوصول
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Tajawal',
-                                      ),
-                                    ),
-                                    Icon(Icons.access_time, size: 18, color: Colors.grey),
-                                  ],
-                                ),
-
-                                // المسافة
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'km${trip.distance}', // استبدالها بالمسافة الفعلية
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Tajawal',
-                                      ),
-                                    ),
-                                    Icon(Icons.directions_car, size: 18, color: Colors.grey),
-                                    Text(
-                                      '\$${trip.price}', // استبدالها بالسعر الفعلي
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Tajawal',
-                                      ),
-                                    ),
-                                    Icon(Icons.attach_money, size: 18, color: Colors.grey),
-                                  ],
-                                ),
-
-                                // المقاعد المتاحة
-                                Obx(() => Text(
-                                  'المقاعد المتاحة: ${trip.seats}',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Color(0xff0F172A),
-                                    fontFamily: 'Tajawal',
-                                  ),
-                                )),
-                              ],
-                            ),
-                          ),
                         ],
                       ),
                     ),

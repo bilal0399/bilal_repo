@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import '../../../../auth/controllers/auth_controller.dart';
+import '../../auth/controllers/auth_controller.dart';
 
 
 class DrawarComponant extends StatelessWidget {
@@ -28,6 +28,17 @@ class DrawarComponant extends StatelessWidget {
                     CircleAvatar(
                       radius: 40,
                       backgroundColor: Colors.grey.shade300,
+                      backgroundImage: AssetImage('assets/images/default_profile.png'), // استبدالها بالرابط الفعلي للصورة
+                      child: Image.asset(
+                        '', // استبدالها بالرابط الفعلي للصورة
+                        errorBuilder: (context, error, stackTrace) {
+                          return Icon(
+                            Icons.person,
+                            size: 40,
+                            color: Colors.grey.shade500,
+                          );
+                        },
+                      ),
                     ),
                     SizedBox(height: 10),
                     Text(

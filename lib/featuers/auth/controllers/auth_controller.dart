@@ -71,7 +71,7 @@ class AuthController extends GetxController {
 
   Future<void> loadUserData() async {
     final prefs = await SharedPreferences.getInstance();
-    name.value = prefs.getString('name') ?? "Guest";
+    name.value = prefs.getString('name') ?? "UserName";
     email.value = prefs.getString('email') ?? "No Email";
 
     if (email.value != "No Email") {

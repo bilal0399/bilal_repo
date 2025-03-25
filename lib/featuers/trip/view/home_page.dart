@@ -30,19 +30,21 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.white,
 
 
-      body: Obx(()=> pages[tripController.currentIndex.value]),
-      bottomNavigationBar:  ConvexAppBar(
-          backgroundColor: Color(0xff1E293B),
-          color: Color(0xff334155),
-          activeColor: Color(0xffF1F5F9),
-          style: TabStyle.fixedCircle,
-          items: [
-            TabItem(icon: Icons.search, title: 'بحث'),
-            TabItem(icon: Icons.home, title: 'الرئيسية'),
-            TabItem(icon: Icons.settings, title: 'الإعدادات'),
-          ],
-          initialActiveIndex:tripController.currentIndex.value ,
-          onTap: (index) => tripController.currentIndex.value= index),
+      body: Obx(() => pages[tripController.currentIndex.value]),
+      bottomNavigationBar: ConvexAppBar(
+        backgroundColor: Colors.white, // لون الخلفية أبيض
+        shadowColor: Colors.black,    // لون الظل أسود لإضافة الحواف السوداء
+        color: Color(0xff334155),      // لون العناصر غير المحددة (رمادي داكن)
+        activeColor: Color(0xff1E293B), // لون العنصر المحدد (كحلي)
+        style: TabStyle.fixedCircle,
+        items: const [
+          TabItem(icon: Icons.search, title: 'بحث'),
+          TabItem(icon: Icons.home, title: 'Home'),
+          TabItem(icon: Icons.person, title: 'Profile'),
+        ],
+        initialActiveIndex: tripController.currentIndex.value,
+        onTap: (index) => tripController.currentIndex.value = index,
+      ),
     );
   }
 }

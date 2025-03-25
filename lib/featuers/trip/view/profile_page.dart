@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../auth/controllers/auth_controller.dart';
+import 'drawar_componant.dart';
 
 class ProfilePage extends StatelessWidget {
   final AuthController authController = Get.find<AuthController>();
@@ -10,6 +11,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffF5F5F5),
+      endDrawer: DrawarComponant(),
       appBar: AppBar(
         backgroundColor: Color(0xff1E293B),
         iconTheme: IconThemeData(color: Colors.white),
@@ -18,7 +20,7 @@ class ProfilePage extends StatelessWidget {
           'الملف الشخصي',
           style: TextStyle(
             color: Colors.white,
-            fontWeight: FontWeight.bold,
+
             fontFamily: 'Tajawal',
           ),
         ),
@@ -36,9 +38,19 @@ class ProfilePage extends StatelessWidget {
               children: [
                 SizedBox(height: 20),
                 CircleAvatar(
-                  radius: 60,
-                  backgroundColor: Color(0xff334155),
-                  backgroundImage: NetworkImage('https://via.placeholder.com/150'),
+                  radius: 40,
+                  backgroundColor: Colors.grey.shade300,
+                  backgroundImage: AssetImage('assets/images/default_profile.png'), // استبدالها بالرابط الفعلي للصورة
+                  child: Image.asset(
+                    '', // استبدالها بالرابط الفعلي للصورة
+                    errorBuilder: (context, error, stackTrace) {
+                      return Icon(
+                        Icons.person,
+                        size: 40,
+                        color: Colors.grey.shade500,
+                      );
+                    },
+                  ),
                 ),
                 SizedBox(height: 20),
                 Text(
@@ -46,6 +58,7 @@ class ProfilePage extends StatelessWidget {
                   style:TextStyle(
                     color: Color(0xff1E293B),
                     fontWeight: FontWeight.bold,
+                    fontFamily: 'Inter',
                     fontSize: 26,
                   ),
                 ),
@@ -54,6 +67,7 @@ class ProfilePage extends StatelessWidget {
                   '${authController.email}',
                   style: TextStyle(
                     color: Color(0xff334155),
+                    fontFamily: 'Inter',
                     fontSize: 18,
                   ),
                 ),
@@ -64,21 +78,6 @@ class ProfilePage extends StatelessWidget {
                 buildProfileOption(Icons.location_on, 'العنوان', 'لم يتم تعيينه'),
                 buildProfileOption(Icons.date_range, 'تاريخ التسجيل', '01/01/2024'),
                 SizedBox(height: 30),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xff1E293B),
-                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  onPressed: () => Get.back(),
-                  child: Text('رجوع',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                      )),
-                ),
                 // Image.network(width: 100,'https://i.imgur.com/7c5Rqlh.png'),
               ],
             ),
@@ -101,6 +100,7 @@ class ProfilePage extends StatelessWidget {
               style: TextStyle(
                 color: Color(0xff1E293B),
                 fontWeight: FontWeight.bold,
+                fontFamily: 'Tajawal',
                 fontSize: 18,
               ),
             ),
@@ -108,6 +108,7 @@ class ProfilePage extends StatelessWidget {
           Text(
             value,
             style: TextStyle(
+              fontFamily: 'Tajawal',
               color: Color(0xff334155),
               fontSize: 16,
             ),

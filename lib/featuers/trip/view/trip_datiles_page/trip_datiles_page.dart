@@ -420,7 +420,7 @@ class TripDatilsPage extends StatelessWidget {
                                     );
                                   },
                                   style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.blue,
+                                      backgroundColor: Color(0xff1E293B),
                                       padding:
                                       EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
                                   child: Text('نعم',
@@ -451,7 +451,7 @@ class TripDatilsPage extends StatelessWidget {
                   ),
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 50),
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: Color(0xff1E293B),
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
