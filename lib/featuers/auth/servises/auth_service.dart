@@ -13,10 +13,10 @@ static login (String email,String password){
     return null;
   }
 }
+
 static register(String email, String password, String name ,String phone   ) {
 
   bool emailExists = users.any((user) => user.Email == email);
-
   if (emailExists) {
     return "البريد الإلكتروني مستخدم مسبقًا";
   }

@@ -8,7 +8,7 @@ import '../../auth/controllers/auth_controller.dart';
 
 class DrawarComponant extends StatelessWidget {
    DrawarComponant({super.key});
-  final AuthController authController = Get.put(AuthController());
+  final AuthController authController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Drawer(

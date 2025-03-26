@@ -5,7 +5,7 @@ import '../../auth/controllers/auth_controller.dart';
 import 'drawar_componant.dart';
 
 class ProfilePage extends StatelessWidget {
-  final AuthController authController = Get.find<AuthController>();
+  final AuthController authController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +40,9 @@ class ProfilePage extends StatelessWidget {
                 CircleAvatar(
                   radius: 40,
                   backgroundColor: Colors.grey.shade300,
-                  backgroundImage: AssetImage('assets/images/default_profile.png'), // استبدالها بالرابط الفعلي للصورة
+                  backgroundImage: AssetImage(''),
                   child: Image.asset(
-                    '', // استبدالها بالرابط الفعلي للصورة
+                    '',
                     errorBuilder: (context, error, stackTrace) {
                       return Icon(
                         Icons.person,

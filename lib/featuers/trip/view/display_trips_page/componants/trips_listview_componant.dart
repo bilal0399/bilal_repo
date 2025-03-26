@@ -9,7 +9,7 @@ import '../../../servises/trip_servise.dart';
 
 class TripsListviewComponant extends StatelessWidget {
   TripsListviewComponant({super.key});
-  final TripController tripController = Get.put(TripController());
+  final TripController tripController = Get.find();
 
   @override
   Widget build(BuildContext context) {

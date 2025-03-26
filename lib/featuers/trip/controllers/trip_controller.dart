@@ -6,14 +6,13 @@ import '../servises/trip_servise.dart';
 
 class TripController extends GetxController {
   RxInt currentIndex = 1.obs;
-
   RxString fromCity = RxString('حلب');
   RxString toCity = RxString('دمشق');
+
   Rx<TimeOfDay?> selectedTime = Rx<TimeOfDay?>(null);
   Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
   //-------------------------------------------------------------------
   Rx<TripModel?> selectedTrip = Rx<TripModel?>(null);
-
   void selectTrip(TripModel trip) {
     selectedTrip.value = trip;
   }
@@ -26,7 +25,6 @@ class TripController extends GetxController {
 
   RxBool isBooked = false.obs;
   void performSearch() {
-
     if (fromCity.value.isEmpty || toCity.value.isEmpty || selectedDate.value == null || selectedTime.value == null) {
       Get.snackbar(
         'بيانات غير مكتملة',
@@ -36,8 +34,6 @@ class TripController extends GetxController {
       isSearching.value = false;
       return;
     }
-
-
     searchResults.value = TripService.searchTrips(
       fromCity.value,
       toCity.value,

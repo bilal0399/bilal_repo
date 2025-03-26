@@ -25,12 +25,10 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return GetMaterialApp(
-
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
           initialRoute: AppRouter.splashPage,
           getPages: AppRouter.appPages,
-
         );
       },
     );

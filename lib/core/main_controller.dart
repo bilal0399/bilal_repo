@@ -10,7 +10,7 @@ class MainController  extends GetxController{
  }
   Future<void> getIsLoggedIn( ) async{
     final prefs = await SharedPreferences.getInstance();
- bool status=     prefs.getBool('isLoggedIn')??false;
+ bool status=prefs.getBool('isLoggedIn')??false;
     isLoggedIn.value = status;
   }
 }

@@ -5,7 +5,7 @@ import '../drawar_componant.dart';
 import 'componants/trips_listview_componant.dart';
 
 class DisplayTripsPage extends StatelessWidget {
-  final TripController tripController = Get.put(TripController());
+  final TripController tripController = Get.find<TripController>();
 
   @override
   Widget build(BuildContext context) {

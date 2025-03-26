@@ -14,8 +14,8 @@ import 'serch_page.dart';
 
 
 class HomePage extends StatelessWidget {
-  final AuthController authController = Get.put(AuthController());
-  final TripController tripController = Get.put(TripController());
+  final AuthController authController = Get.find();
+  final TripController tripController = Get.find();
 
 
   final List<Widget> pages = [

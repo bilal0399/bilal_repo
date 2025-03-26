@@ -42,7 +42,7 @@ class LogenComponant extends StatelessWidget {
                   value: authController.isChacked.value,
                   onChanged: (value) => authController.isChacked.value = value!,
                   activeColor: Colors.blue,
-                  side: const BorderSide(color: Colors.blue),
+                  side:  BorderSide(color: Colors.blue),
                 ),
               ),
               Text(
@@ -50,7 +50,7 @@ class LogenComponant extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 12.sp,
-                  color: const Color(0xff64748B),
+                  color:  Color(0xff64748B),
                 ),
               ),
               SizedBox(width: 80.w),
@@ -59,7 +59,7 @@ class LogenComponant extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 12.sp,
-                  color: const Color(0xff2563EB),
+                  color:  Color(0xff2563EB),
                 ),
               ),
             ],
@@ -79,7 +79,7 @@ class LogenComponant extends StatelessWidget {
             style: TextStyle(
               fontSize: 12.sp,
               fontWeight: FontWeight.w600,
-              color: const Color(0xff64748B),
+              color:  Color(0xff64748B),
             ),
           ),
           SizedBox(height: 24.h),
@@ -99,14 +99,14 @@ class LogenComponant extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 16.sp,
-                        color: const Color(0xff64748B),
+                        color:  Color(0xff64748B),
                       ),
                     ),
                   ],
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(32.r),
-                  border: Border.all(color: const Color(0xffCBD5E1)),
+                  border: Border.all(color:  Color(0xffCBD5E1)),
                 ),
               ),
               SizedBox(width: 8.w),
@@ -116,7 +116,7 @@ class LogenComponant extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 20.w),
                 child: Row(
                   children: [
-                    Icon(Icons.apple, size: 20.sp, color: const Color(0xff64748B)),
+                    Icon(Icons.apple, size: 20.sp, color:  Color(0xff64748B)),
                     SizedBox(width: 8.w),
                     Text(
                       'Apple',
@@ -124,14 +124,14 @@ class LogenComponant extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 16.sp,
-                        color: const Color(0xff64748B),
+                        color:  Color(0xff64748B),
                       ),
                     ),
                   ],
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(32.r),
-                  border: Border.all(color: const Color(0xffCBD5E1)),
+                  border: Border.all(color:  Color(0xffCBD5E1)),
                 ),
               ),
             ],

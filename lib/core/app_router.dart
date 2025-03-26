@@ -25,8 +25,8 @@ class AppRouter  {
   static List<GetPage> appPages=[
     GetPage(name: authPage, page:()=>AuthPage(),binding:AuthBinding() ),
     GetPage(name: datiles, page:()=>TripDatilsPage(),binding: TripBinding()),
-    GetPage(name: serch, page:()=>SearchPage() ),
-    GetPage(name: home, page: ()=>HomePage(),binding: TripBinding()),
+    GetPage(name: serch, page:()=>SearchPage() ,binding: TripBinding()),
+    GetPage(name: home, page: ()=>HomePage(),bindings:[ TripBinding(),AuthBinding()]),
     GetPage(name: splashPage, page:()=>SplashScreen(),binding:SplashBinding() ),
     GetPage(name: profile, page:()=>ProfilePage(),binding: TripBinding()),
   ];

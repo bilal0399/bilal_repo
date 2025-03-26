@@ -6,7 +6,7 @@ import '../servises/trip_servise.dart';
 import 'drawar_componant.dart';
 
 class SearchPage extends StatelessWidget {
-  final TripController tripController = Get.find<TripController>();
+  final TripController tripController = Get.find();
 
   String formatDate(DateTime date) {
     return '${date.day}/${date.month}/${date.year}';

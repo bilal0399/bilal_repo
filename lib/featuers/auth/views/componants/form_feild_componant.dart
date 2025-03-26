@@ -25,8 +25,8 @@ class FormFeildComponant extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 52.h, // تعديل الارتفاع
-      width: 342.w, // تعديل العرض
+      height: 52.h,
+      width: 342.w,
       child: TextFormField(
         onChanged: (value) {
           if (text == 'Full Name') {
@@ -50,23 +50,23 @@ class FormFeildComponant extends StatelessWidget {
         },
         decoration: InputDecoration(
           filled: true,
-          fillColor: const Color(0xFFFFFFFF),
+          fillColor:  Color(0xFFFFFFFF),
           prefixIcon: icon,
           labelText: text,
-          labelStyle: const TextStyle(color: Color(0xff64748B)),
+          labelStyle:  TextStyle(color: Color(0xff64748B)),
           contentPadding:
-          EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w), // تعديل البادينغ
+          EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(32.r), // تعديل نصف القطر
-            borderSide: const BorderSide(color: Color(0xFFE2E8F0), width: 1),
+            borderRadius: BorderRadius.circular(32.r),
+            borderSide:  BorderSide(color: Color(0xFFE2E8F0), width: 1),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(32.r),
-            borderSide: const BorderSide(color: Colors.blue, width: 2),
+            borderSide:  BorderSide(color: Colors.blue, width: 2),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(32.r),
-            borderSide: const BorderSide(color: Color(0xFFE2E8F0), width: 1),
+            borderSide:  BorderSide(color: Color(0xFFE2E8F0), width: 1),
           ),
         ),
       ),

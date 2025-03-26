@@ -39,9 +39,7 @@ class AuthController extends GetxController {
 
   void register() {
     var result = AuthService.register(email.value, password.value, name.value, phone.value);
-
     if (result != null) {
-
       Get.snackbar("Success", result, snackPosition: SnackPosition.BOTTOM);
       Get.find<MainController>().isLoggedIn.value = true;
       isSignUp.value = false;
@@ -67,8 +65,6 @@ class AuthController extends GetxController {
     await prefs.setString('name', name.value);
     await prefs.setString('email', email.value);
   }
-
-
   Future<void> loadUserData() async {
     final prefs = await SharedPreferences.getInstance();
     name.value = prefs.getString('name') ?? "UserName";

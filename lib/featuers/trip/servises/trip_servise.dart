@@ -180,9 +180,7 @@ class TripService {
     int userTimeInMinutes = (hour * 60) + minute;
 
     DateTime previousDay = userDate.subtract(Duration(days: 1));
-
     DateTime nextDay = userDate.add(Duration(days: 1));
-
     return TripService.trips.where((trip) {
       int tripTimeInMinutes = (trip.time.hour * 60) + trip.time.minute;
       bool isTimeInRange = (tripTimeInMinutes >= userTimeInMinutes - 300 &&
