@@ -8,11 +8,9 @@ import 'drawar_componant.dart';
 class SearchPage extends StatelessWidget {
   final TripController tripController = Get.find<TripController>();
 
-  // Helper function to format the date
   String formatDate(DateTime date) {
     return '${date.day}/${date.month}/${date.year}';
   }
-
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -130,7 +128,7 @@ class SearchPage extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () => tripController.selectTime(context),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue, // Change to blue
+                          backgroundColor: Color(0xff8eabe1),
                           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         ),
                         child: Text(
@@ -142,8 +140,8 @@ class SearchPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: 20), // Space between buttons
-                    // Select Date Button
+                    SizedBox(width: 20),
+
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () async {
@@ -158,7 +156,7 @@ class SearchPage extends StatelessWidget {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue, // Change to blue
+                          backgroundColor: Color(0xff8eabe1),
                           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         ),
                         child: Text(
@@ -173,11 +171,10 @@ class SearchPage extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 10),
-                // Display Selected Time and Date
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Display Selected Time
                     Obx(
                           () => Text(
                         tripController.selectedTime.value != null
@@ -206,8 +203,6 @@ class SearchPage extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 30),
-
-                // Search Button
                 Center(
                   child: ElevatedButton(
                     onPressed: () {

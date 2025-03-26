@@ -22,7 +22,6 @@ class HomePage extends StatelessWidget {
     SearchPage(),
     DisplayTripsPage(),
     ProfilePage(),
-    // SettingsPage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -32,15 +31,15 @@ class HomePage extends StatelessWidget {
 
       body: Obx(() => pages[tripController.currentIndex.value]),
       bottomNavigationBar: ConvexAppBar(
-        backgroundColor: Colors.white, // لون الخلفية أبيض
-        shadowColor: Colors.black,    // لون الظل أسود لإضافة الحواف السوداء
-        color: Color(0xff334155),      // لون العناصر غير المحددة (رمادي داكن)
-        activeColor: Color(0xff1E293B), // لون العنصر المحدد (كحلي)
+        backgroundColor: Colors.white,
+        shadowColor: Colors.black,
+        color: Color(0xff656c7c),
+        activeColor: Color(0xff1E293B),
         style: TabStyle.fixedCircle,
         items: const [
-          TabItem(icon: Icons.search, title: 'بحث'),
-          TabItem(icon: Icons.home, title: 'Home'),
-          TabItem(icon: Icons.person, title: 'Profile'),
+          TabItem(icon:Icon(Icons.search,color: Color(0xff959292),), title: 'بحث',fontFamily: 'Tajawal',activeIcon: Icon(Icons.search,color:  Color(0xff1E293B),)),
+          TabItem(icon: Icons.home, title: 'الرئيسية ',fontFamily: 'Tajawal'),
+          TabItem(icon: Icon(Icons.person,color: Color(0xff959292),), title: 'البروفايل',fontFamily: 'Tajawal',activeIcon: Icon(Icons.person,color:  Color(0xff1E293B),)),
         ],
         initialActiveIndex: tripController.currentIndex.value,
         onTap: (index) => tripController.currentIndex.value = index,

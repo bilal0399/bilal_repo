@@ -12,12 +12,12 @@ class TripModel {
   String imgLink;
   RxInt seats;
   String distance;
-  double startLat;
-  double startLng;
-  double endLat;
-  double endLng;
+  double startLat = 0.0;
+  double startLng = 0.0;
+  double endLat = 0.0;
+  double endLng = 0.0;
+  RxBool isBooked;
 
-  // Constructor
   TripModel({
     required int seats,
     required this.city2,
@@ -35,5 +35,6 @@ class TripModel {
     required this.endLat,
     required this.endLng,
   })  : time = TimeOfDay(hour: hour, minute: minute),
-        seats = seats.obs;
+        seats = seats.obs,
+        isBooked = false.obs;
 }

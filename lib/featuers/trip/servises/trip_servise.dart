@@ -176,26 +176,21 @@ class TripService {
     'اعزاز'
   ];
   static List<TripModel> searchTrips(String from, String to, DateTime userDate, int hour, int minute) {
-    // تحويل الوقت المدخل إلى دقائق
+
     int userTimeInMinutes = (hour * 60) + minute;
 
-    // تحديد نطاق التاريخ (اليوم السابق واليوم التالي)
     DateTime previousDay = userDate.subtract(Duration(days: 1));
+
     DateTime nextDay = userDate.add(Duration(days: 1));
 
     return TripService.trips.where((trip) {
-      // تحويل وقت الرحلة إلى دقائق
       int tripTimeInMinutes = (trip.time.hour * 60) + trip.time.minute;
-
-      // التحقق مما إذا كان الوقت يقع ضمن النطاق ±5 ساعات
       bool isTimeInRange = (tripTimeInMinutes >= userTimeInMinutes - 300 &&
           tripTimeInMinutes <= userTimeInMinutes + 300);
 
-      // التحقق مما إذا كان التاريخ يقع ضمن النطاق (اليوم السابق أو نفس اليوم أو اليوم التالي)
       bool isDateInRange = (trip.date.isAfter(previousDay) || trip.date.isAtSameMomentAs(previousDay)) &&
           (trip.date.isBefore(nextDay) || trip.date.isAtSameMomentAs(nextDay));
 
-      // التحقق من المدن ونطاق الوقت والتاريخ
       return trip.city1.toLowerCase().contains(from.toLowerCase()) &&
           trip.city2.toLowerCase().contains(to.toLowerCase()) &&
           isTimeInRange &&

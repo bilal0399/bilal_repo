@@ -24,7 +24,6 @@ class TripController extends GetxController {
   var searchResults = <TripModel>[].obs;
   RxBool isSearching = false.obs;
 
-  // متغير جديد للتحكم في حالة الحجز
   RxBool isBooked = false.obs;
   void performSearch() {
 
@@ -38,7 +37,7 @@ class TripController extends GetxController {
       return;
     }
 
-    // استدعاء دالة البحث باستخدام التاريخ والوقت المختارين
+
     searchResults.value = TripService.searchTrips(
       fromCity.value,
       toCity.value,
@@ -47,16 +46,16 @@ class TripController extends GetxController {
       selectedTime.value!.minute,
     ) as List<TripModel>;
 
-    // التحقق مما إذا كانت هناك نتائج للبحث
+
     if (searchResults.isNotEmpty) {
-      isSearching.value = true; // تم العثور على رحلات
+      isSearching.value = true;
     } else {
       Get.snackbar(
         'لا توجد رحلات',
         'لم يتم العثور على أي رحلة تناسب معايير البحث.',
         colorText: Colors.red,
       );
-      isSearching.value = false; // لم يتم العثور على رحلات
+      isSearching.value = false;
     }
   }
 
@@ -78,8 +77,6 @@ class TripController extends GetxController {
     }
   }
 
-
-
   void bookSeat(int index) {
     if (index >= 0 && index < TripService.trips.length) {
       var trip = TripService.trips[index];
@@ -89,7 +86,6 @@ class TripController extends GetxController {
       }
     }
   }
-
   String getMonthName(int month) {
      var months = [
       'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',

@@ -44,6 +44,7 @@ class AuthPage extends StatelessWidget {
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       color: Colors.white,
+
                       fontSize: 24.sp,
                       fontWeight: FontWeight.w700,
                     ),
@@ -58,6 +59,7 @@ class AuthPage extends StatelessWidget {
                   style: TextStyle(
                     color: const Color(0xff94A3B8),
                     fontSize: 12.sp,
+
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -82,7 +84,7 @@ class AuthPage extends StatelessWidget {
                   children: [
                     Obx(
                           () => Container(
-                        padding: EdgeInsets.all(4.w), // تأكد أن w مفعلة صح
+                        padding: EdgeInsets.all(4.w),
                         height: 52.h,
                         width: 342.w,
                         child: Row(

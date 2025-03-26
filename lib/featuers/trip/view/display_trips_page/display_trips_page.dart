@@ -28,13 +28,13 @@ class DisplayTripsPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Header with Refresh Button
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
                 onPressed: () {
-                  tripController.resetSearch(); // Reset search and refresh the list
+                  tripController.resetSearch();
                 },
                 icon: Icon(Icons.refresh, color: Colors.black),
               ),
@@ -68,10 +68,10 @@ class DisplayTripsPage extends StatelessWidget {
           Expanded(
             child: Obx(() {
               if (tripController.isSearching.value && tripController.searchResults.isNotEmpty) {
-                // Show search results
+
                 return TripsListviewComponant( );
               } else {
-                // Show all trips
+
                 return TripsListviewComponant();
               }
             }),

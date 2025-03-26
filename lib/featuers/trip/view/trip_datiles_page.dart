@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../../controllers/trip_controller.dart';
-import '../../model/trip_model.dart';
+import '../controllers/trip_controller.dart';
+import '../model/trip_model.dart';
 
 class TripDatilsPage extends StatelessWidget {
   TripDatilsPage({super.key});
@@ -331,132 +331,155 @@ class TripDatilsPage extends StatelessWidget {
               ),
             ),
             Positioned(
-              top:600,
+              top: 600,
               left: 50,
               right: 50,
-              child: InkWell(
-                onTap: () {
-                  if (tripController.isBooked.value) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('لقد قمت بالحجز مسبقًا',
-                            style: TextStyle(fontFamily: 'Tajawal', color: Colors.white)),
-                        behavior: SnackBarBehavior.floating,
-                        backgroundColor: Colors.redAccent,
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                    return;
-                  }
+              child: Obx(() {
 
-                  if (trip.seats == 0) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('المقاعد انتهت',
-                            style: TextStyle(fontFamily: 'Tajawal', color: Colors.white)),
-                        behavior: SnackBarBehavior.floating,
-                        backgroundColor: Colors.orangeAccent,
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                    return;
-                  }
+                if (trip.isBooked.value) {
 
-                  showDialog(
-                    context: context,
-                    builder: (context) => Dialog(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                      backgroundColor: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(Icons.warning_amber_rounded, color: Colors.amber, size: 50),
-                            SizedBox(height: 10),
-                            Text('تأكيد الحجز',
-                                style: TextStyle(
-                                    fontFamily: 'Tajawal',
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black)),
-                            SizedBox(height: 10),
-                            Text(
-                              'هل أنت متأكد من الحجز؟\n(إذا قمت بالحجز لا يمكن التراجع)',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontFamily: 'Tajawal', fontSize: 18),
-                            ),
-                            SizedBox(height: 20),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  style: TextButton.styleFrom(
-                                      backgroundColor: Colors.grey[300],
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 10)),
-                                  child: Text('إلغاء',
-                                      style: TextStyle(
-                                          fontFamily: 'Tajawal',
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold)),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    tripController.isBooked.value = true;
-                                    trip.seats -= 1; // ينقص عدد المقاعد
-                                    Navigator.pop(context);
-
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text('تم الحجز بنجاح!',
-                                            style: TextStyle(
-                                                fontFamily: 'Tajawal', color: Colors.white)),
-                                        behavior: SnackBarBehavior.floating,
-                                        backgroundColor: Colors.green,
-                                        duration: Duration(seconds: 2),
-                                      ),
-                                    );
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: Color(0xff1E293B),
-                                      padding:
-                                      EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
-                                  child: Text('نعم',
-                                      style: TextStyle(
-                                          fontFamily: 'Tajawal',
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold)),
-                                ),
-                              ],
-                            ),
-                          ],
+                  return Container(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Center(
+                      child: Text(
+                        ' تم الحجز',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Tajawal',
+                          fontSize: 20,
                         ),
                       ),
                     ),
                   );
-                },
-                child: Container(
-                  child: Center(
-                    child: Text(
-                      'حجز الآن',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Tajawal',
-                        fontSize: 20,
+                } else {
+                  return InkWell(
+                    onTap: () {
+                      if (trip.seats.value == 0) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'المقاعد انتهت',
+                              style: TextStyle(fontFamily: 'Tajawal', color: Colors.white),
+                            ),
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.orangeAccent,
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                        return;
+                      }
+
+                      showDialog(
+                        context: context,
+                        builder: (context) => Dialog(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                          backgroundColor: Colors.white,
+                          child: Padding(
+                            padding:  EdgeInsets.all(20.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(Icons.warning_amber_rounded, color: Colors.amber, size: 50),
+                                SizedBox(height: 10),
+                                Text(
+                                  'تأكيد الحجز',
+                                  style: TextStyle(
+                                    fontFamily: 'Tajawal',
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  'هل أنت متأكد من الحجز؟\n(إذا قمت بالحجز لا يمكن التراجع)',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontFamily: 'Tajawal', fontSize: 18),
+                                ),
+                                SizedBox(height: 20),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      style: TextButton.styleFrom(
+                                        backgroundColor: Colors.grey[300],
+                                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                      ),
+                                      child: Text(
+                                        'إلغاء',
+                                        style: TextStyle(
+                                          fontFamily: 'Tajawal',
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        trip.isBooked.value = true;
+                                        trip.seats.value -= 1;
+                                        Navigator.pop(context);
+
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'تم الحجز بنجاح!',
+                                              style: TextStyle(fontFamily: 'Tajawal', color: Colors.white),
+                                            ),
+                                            behavior: SnackBarBehavior.floating,
+                                            backgroundColor: Colors.green,
+                                            duration: Duration(seconds: 2),
+                                          ),
+                                        );
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Color(0xff1E293B),
+                                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                      ),
+                                      child: Text(
+                                        'نعم',
+                                        style: TextStyle(
+                                          fontFamily: 'Tajawal',
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+                      decoration: BoxDecoration(
+                        color: Color(0xff1E293B),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'حجز الآن',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Tajawal',
+                            fontSize: 20,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 50),
-                  decoration: BoxDecoration(
-                    color: Color(0xff1E293B),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
-              ),
-
+                  );
+                }
+              }),
             ),
           ],
         ),

@@ -15,7 +15,7 @@ class TripsListviewComponant extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: FutureBuilder<List<TripModel>>(
-        future: Future.delayed(const Duration(milliseconds: 200), () => TripService.trips),
+        future: Future.delayed( Duration(milliseconds: 500), () => TripService.trips),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return ListView.builder(
@@ -25,10 +25,10 @@ class TripsListviewComponant extends StatelessWidget {
                   baseColor: Colors.grey[300]!,
                   highlightColor: Colors.grey[100]!,
                   child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    padding: const EdgeInsets.all(10),
+                    margin:  EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding:  EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: const Color(0xffF1F5F9),
+                      color:  Color(0xffF1F5F9),
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Row(
@@ -38,15 +38,15 @@ class TripsListviewComponant extends StatelessWidget {
                           backgroundColor: Colors.grey[400],
                           radius: 25,
                         ),
-                        const SizedBox(width: 10),
+                         SizedBox(width: 10),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(height: 16, color: Colors.grey[400]),
-                              const SizedBox(height: 5),
+                               SizedBox(height: 5),
                               Container(height: 16, color: Colors.grey[400]),
-                              const SizedBox(height: 5),
+                               SizedBox(height: 5),
                               Container(height: 14, width: 100, color: Colors.grey[400]),
                             ],
                           ),
@@ -87,19 +87,15 @@ class TripsListviewComponant extends StatelessWidget {
                           ),
                         ],
                         borderRadius: BorderRadius.circular(15),
-                        // border: Border.all(color: Color(0xff8da5df), width: 1),
                       ),
                       child: Row(
                         children: [
-                          // الجزء الأول: الصورة الجانبية
-
                           Expanded(
                             flex: 3,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                // العنوان (حلب - دمشق)
                                 Text(
                                   '${trip.city1} - ${trip.city2}',
                                   style: TextStyle(
@@ -109,8 +105,6 @@ class TripsListviewComponant extends StatelessWidget {
                                     fontFamily: 'Tajawal',
                                   ),
                                 ),
-
-                                // التاريخ
                                 Text(
                                   ' ${tripController.getWeekdayName(trip.date.weekday)} ${trip.date.day} ${tripController.getMonthName(trip.date.month)} ${trip.date.year}',
                                   style: TextStyle(
@@ -176,13 +170,10 @@ class TripsListviewComponant extends StatelessWidget {
 
                                   ],
                                 ),
-
-                                // المقاعد المتاحة
-
                               ],
                             ),
                           ),
-                          SizedBox(width: 15), // فاصل بين الصورة والتفاص// يل
+                          SizedBox(width: 15),
                           Expanded(
                             flex: 2,
                             child: ClipRRect(
@@ -194,7 +185,7 @@ class TripsListviewComponant extends StatelessWidget {
                                 color: Colors.grey,
                               )
                                   : Image.asset(
-                                trip.imgLink2, // استبدالها بالرابط الفعلي للصورة
+                                trip.imgLink2,
                                 fit: BoxFit.cover,
                                 height: 120,
                                 width: double.infinity,
@@ -208,9 +199,6 @@ class TripsListviewComponant extends StatelessWidget {
                               ),
                             ),
                           ),
-
-                          // الجزء الثاني: التفاصيل
-
                         ],
                       ),
                     ),

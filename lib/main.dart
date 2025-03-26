@@ -30,11 +30,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           initialRoute: AppRouter.splashPage,
           getPages: AppRouter.appPages,
-          theme: ThemeData(
 
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
         );
       },
     );
